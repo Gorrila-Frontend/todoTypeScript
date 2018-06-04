@@ -14,10 +14,13 @@ ul {
   flex-flow: column;
   width: 400px;
   margin: 0 auto;
+  margin-bottom: 30px;
+  
 }
 
 li {
   margin-top: 15px;
+  margin-bottom: 15px;
   word-wrap: break-word;
 }
 form {
@@ -35,17 +38,18 @@ h1 {
 }
 @media screen and (max-width: 1024px) {
   body{
-    padding: 0 15px 0 15px;
+    padding: 0px 15px 100px 15px;
   }
   ul {
     display: flex;
     flex-flow: column;
     width: 290px;
     margin: 0 auto;
+    margin-bottom: 15px;
   }
   
   li {
-    margin-top: 15px;
+    margin-top: 10px;
     word-wrap: break-word;
   }
   form {

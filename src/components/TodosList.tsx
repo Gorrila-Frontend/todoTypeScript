@@ -51,9 +51,6 @@ render() {
   return (
       <ListGroup>
         <div 
-          style={{
-            marginBottom: '50px',
-          }}
         >
       <Button 
         onClick={this.handleFilterCompleted}
