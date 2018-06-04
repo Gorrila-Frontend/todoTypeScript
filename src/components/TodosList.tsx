@@ -2,6 +2,7 @@ import * as React from 'react';
 import Todo from '../models/Todo';
 import { Button } from 'reactstrap';
 import { ListGroup, ListGroupItem } from 'reactstrap';
+import '../index.css'; 
 
 interface Props {
   todos: Todo[];
@@ -19,7 +20,7 @@ export default class AddTodo extends React.Component<Props, State> {
 constructor(props: Props) {
   super(props);
   this.state = {
-    isActive: false,
+    isActive: true,
     isCompleted: false,
     isFilter: true
   }
@@ -49,9 +50,10 @@ handleAllFilter= () => {
 render() {
   const { todos, onTodoClicked } = this.props;
   return (
-      <ListGroup>
+      <ListGroup className="TodoList">
         <div 
-        >
+
+         >
       <Button 
         onClick={this.handleFilterCompleted}
         color={this.state.isCompleted ?  'success' : 'primary'}
