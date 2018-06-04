@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { FormEvent } from 'react';
+import { Button, Input } from 'reactstrap';
+
 interface Props {
   handleSubmit: (value: string) => void;
 }
@@ -42,8 +44,20 @@ export default class AddTodoForm extends React.Component<Props, State> {
     const { _updateValue, _handleSubmit } = this;
     return (
       <form onSubmit={_handleSubmit}>
-        <input type="text" value={value} onChange={e => _updateValue(e.target.value)} />
-        <button type="submit">Add todo !</button>
+        <Input 
+          type="text" 
+          placeholder="Add new task" 
+          onChange={e => _updateValue(e.target.value)}
+          value={value}
+        />
+        <Button 
+          style={{
+            width: '100px',
+            margin: '30px auto 50px auto'
+          }}
+          color="success">
+          Add task
+        </Button>{' '}
       </form>
     );
   }

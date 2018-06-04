@@ -1,12 +1,30 @@
 :global(body) {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
 }
+
 
 ul {
   display: flex;
   flex-flow: column;
   width: 600px;
   margin: 0 auto;
+}
+
+li {
+  margin-top: 15px;
+  word-wrap: break-word;
+}
+form {
+  display: flex;
+  flex-flow: column;
+  width: 600px;
+  margin: 0 auto;
+}
+h1 {
+  text-align: center;
+  margin: 30px 0 30px 0;
+  font-weight: 600;
+  font-family: 'Open Sans', sans-serif;
 }

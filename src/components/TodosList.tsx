@@ -16,124 +16,154 @@ interface State {
 }
 
 export default class AddTodo extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      isActive: false,
-      isCompleted: false,
-      isFilter: true
-    }
+constructor(props: Props) {
+  super(props);
+  this.state = {
+    isActive: false,
+    isCompleted: false,
+    isFilter: true
   }
-  handleFilterCompleted = () => {
-      return this.setState({ 
-        ...this.state, 
-        isCompleted: !this.state.isCompleted,
-        isActive: !this.state.isActive
-      }) 
-  }
-  handleFilterActive = () => {
-      return this.setState({ ...this.state, isActive: !this.state.isActive , isCompleted: false}) 
-  }
-  handleAllFilter= () => {
-    if(this.state.isFilter)
-{    
-    return this.setState({
-      isActive: false,
+}
+handleFilterCompleted = () => {
+    return this.setState({ 
+      ...this.state, 
+      isCompleted: !this.state.isCompleted,
+      isActive: !this.state.isActive
+    }) 
+}
+handleFilterActive = () => {
+    return this.setState({ 
+      ...this.state, isActive: 
+      !this.state.isActive , 
       isCompleted: false
+    }) 
+}
+handleAllFilter= () => {
+  if(this.state.isFilter) {    
+  return this.setState({
+    isActive: false,
+    isCompleted: false
+  })
+}
+} 
+render() {
+  const { todos, onTodoClicked } = this.props;
+  return (
+      <ListGroup>
+        <div 
+          style={{
+            marginBottom: '50px',
+          }}
+        >
+      <Button 
+        onClick={this.handleFilterCompleted}
+        color={this.state.isCompleted ?  'success' : 'primary'}
+      >
+      Completed
+      </Button>
+      {' '}
+      <Button 
+        onClick={this.handleFilterActive}
+        color={this.state.isActive ?  'success' : 'primary'}
+      >
+      Active
+      </Button>
+      {' '}
+      <Button 
+        onClick={this.handleAllFilter}
+        outline={true} 
+        color='danger'
+      >
+      All
+      </Button>
+      {' '}
+      </div>
+      {
+        this.listFilter(todos)
+      }
+    </ListGroup>
+  );
+}
 
-    })
+listFilter = (todos) => {
+  if (this.state.isCompleted) {
+    return this.toggleFilterCompleted(todos).map(
+      todo => (
+        <ListGroupItem 
+          
+          color={
+            todo.done ? 'success' : 'info'
+          }
+          key={todo.id}
+          onClick={() => this.props.onTodoClicked(todo.id)}
+          style={{ 
+            textDecoration: 
+            `${todo.done ? 'line-through' : ''}`, 
+            cursor: 'pointer',
+          }}
+          
+        >
+          {todo.name}
+        </ListGroupItem>
+      )
+    )
   }
-  } 
-  render() {
-    const { todos, onTodoClicked } = this.props;
-    return (
-        <ListGroup>
-          <div>
-        <Button 
-          onClick={this.handleFilterCompleted}
-          color={this.state.isCompleted ?  'success' : 'primary'}
-        >
-        Completed
-        </Button>
-        {' '}
-        <Button 
-          onClick={this.handleFilterActive}
-          color={this.state.isActive ?  'success' : 'primary'}
-        >
-        Active
-        </Button>
-        {' '}
-        <Button 
-          onClick={this.handleAllFilter}
-          outline={true} 
-          color="primary"
-        >
-        All
-        </Button>
-        {' '}
-        </div>
-        {
-          this.listFilter(todos)
+  else if (this.state.isActive) {
+    return this.toggleFilterActive(todos).map(todo => (
+      <ListGroupItem 
+        key={todo.id}
+        onClick={() => this.props.onTodoClicked(todo.id)}
+        style={{ 
+          textDecoration: 
+          `${todo.done ? 'line-through' : ''}`, 
+          cursor: 'pointer',
+        }}
+        color={
+          todo.done ? 'success' : 'info'
         }
-      </ListGroup>
-    );
+      >
+        {todo.name}
+      </ListGroupItem >)
+    )
+  }  
+  else if (this.state.isFilter) {
+    return this.toggleAllFilter(todos).map(todo => (
+      <ListGroupItem 
+        key={todo.id}
+        color={
+          todo.done ? 'success' :  'info'
+        }
+        onClick={() => this.props.onTodoClicked(todo.id)}
+        style={{ 
+          textDecoration: 
+          `${todo.done ? 'line-through' : ''}`, 
+          cursor: 'pointer' }}
+      >
+        {todo.name}
+      </ListGroupItem >)
+    )
+  }  
   }
 
-  listFilter = (todos) => {
-    if (this.state.isCompleted) {
-      return this.toggleFilterCompleted(todos).map(todo => (
-        <ListGroupItem 
-          key={todo.id}
-          onClick={() => this.props.onTodoClicked(todo.id)}
-          style={{ textDecoration: `${todo.done ? 'line-through' : ''}`, cursor: 'pointer' }}
-        >
-          {todo.name}
-        </ListGroupItem>)
-      )
-    }
-    else if (this.state.isActive) {
-      return this.toggleFilterActive(todos).map(todo => (
-        <ListGroupItem 
-          key={todo.id}
-          onClick={() => this.props.onTodoClicked(todo.id)}
-          style={{ textDecoration: `${todo.done ? 'line-through' : ''}`, cursor: 'pointer' }}
-        >
-          {todo.name}
-        </ListGroupItem >)
-      )
-    }  
-    else if (this.state.isFilter) {
-      return this.toggleAllFilter(todos).map(todo => (
-        <ListGroupItem 
-          key={todo.id}
-          onClick={() => this.props.onTodoClicked(todo.id)}
-          style={{ textDecoration: `${todo.done ? 'line-through' : ''}`, cursor: 'pointer' }}
-        >
-          {todo.name}
-        </ListGroupItem >)
-      )
-    }  
-   }
-
-   toggleFilterCompleted = (todos) => {
+  toggleFilterCompleted = (todos) => {
     if (this.state.isCompleted) {
       return [...this.props.todos.filter(todo => todo.done )]
     }
-   }
+  }
 
-   toggleFilterActive = (todos) => {
+  toggleFilterActive = (todos) => {
     if (this.state.isActive) {
       return [...this.props.todos.filter(todo => !todo.done )]
     }
-   }
-   toggleAllFilter = (todos) => {
+  }
+  toggleAllFilter = (todos) => {
     if (this.state.isFilter) {
       return [...this.props.todos]
       
     }
-   }
-
   }
-  
+
+}
+
 
 
