@@ -71,7 +71,6 @@ render() {
       {' '}
       <Button 
         onClick={this.handleAllFilter}
-        outline={true} 
         color='danger'
       >
       All

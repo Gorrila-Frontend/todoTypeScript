@@ -3,12 +3,16 @@
   padding: 0;
   font-family: 'Roboto', sans-serif;
 }
+body{
+  background: url('./img/bg_1.jpg');
+  
+}
 
 
 ul {
   display: flex;
   flex-flow: column;
-  width: 600px;
+  width: 400px;
   margin: 0 auto;
 }
 
@@ -19,7 +23,7 @@ li {
 form {
   display: flex;
   flex-flow: column;
-  width: 600px;
+  width: 400px;
   margin: 0 auto;
 }
 h1 {
@@ -27,4 +31,27 @@ h1 {
   margin: 30px 0 30px 0;
   font-weight: 600;
   font-family: 'Open Sans', sans-serif;
+  color: #fff;
+}
+@media screen and (max-width: 1024px) {
+  body{
+    padding: 0 15px 0 15px;
+  }
+  ul {
+    display: flex;
+    flex-flow: column;
+    width: 290px;
+    margin: 0 auto;
+  }
+  
+  li {
+    margin-top: 15px;
+    word-wrap: break-word;
+  }
+  form {
+    display: flex;
+    flex-flow: column;
+    width: 290px;
+    margin: 0 auto;
+  }
 }
